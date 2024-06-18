@@ -15,10 +15,10 @@ export const GET = async () => {
   };
   
   
-  // export const PUT = async (req) => {
-  // };
+  export const PUT = async (req) => {
+  };
   
 
 
-  // export const DELETE = async (req) => {
-  // };
+  export const DELETE = async (req) => {
+  };
