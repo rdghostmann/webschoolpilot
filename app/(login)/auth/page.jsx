@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-// import loginImage from '../../../../public/assets/img/login.png';
 import loginImage from '../../../public/Institution.png';
 
 import { RiLockPasswordLine } from "react-icons/ri";
@@ -15,7 +14,6 @@ import { MdAlternateEmail } from "react-icons/md";
 const Login = () => {
   const router = useRouter();
   const [error, setError] = useState("");
-  // const session = useSession();
   const { data: session, status: sessionStatus } = useSession();
   
   useEffect(() => {
@@ -67,7 +65,7 @@ const Login = () => {
       </div>
     );
   }
-  
+
   
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -79,8 +77,6 @@ const Login = () => {
           <div className="mt-6">
             <h1 className="text-center text-2xl font-bold">Login to SchoolPilot🚀</h1>
            
-            {/* <h2 className="text-center text-xl font-semibold mt-4">Sign in</h2> */}
-
             <form onSubmit={handleSubmit} className="mt-8 space-y-6">
               <div className="rounded-md shadow-sm -space-y-px">
                 <div className="mb-4 relative">
@@ -97,7 +93,6 @@ const Login = () => {
                   />
                   <span className="absolute top-1/2 right-0 pr-3 flex items-center text-gray-500">
                    <MdAlternateEmail fontSize={20} />
-                    {/* <i className="fas fa-user-circle"></i> */}
                   </span>
                 </div>
                 <div className="mb-4 relative">
@@ -115,7 +110,6 @@ const Login = () => {
                   />
                   <span className="absolute top-1/2 right-0 pr-3 flex items-center justify-center text-gray-500">
                     <RiLockPasswordLine fontSize={20} />
-                    {/* <i className="feather-eye toggle-password"></i> */}
                   </span>
                 </div>
               </div>
