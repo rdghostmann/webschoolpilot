@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import Image from "next/image";
 import Link from "next/link";
 import loginImg from "../../public/assets/img/login.png";
-import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 const RegisterSchool = () => {

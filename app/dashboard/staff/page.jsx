@@ -6,8 +6,7 @@ import { SlCalender } from "react-icons/sl";
 import { LuAlarmClock } from "react-icons/lu";
 import { MdTouchApp } from "react-icons/md";
 
-import fingerUi from "../../../../public/assets/img/fingerUI.png"
-import AttendanceTable from '../(quick-access)/attendance/AttendanceTable';
+import fingerUi from "../../../public/assets/img/fingerUI.png"
 
 
 
