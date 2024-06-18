@@ -1,8 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
-import fingerUi from '../../../public/assets/img/fingerUI.png'
+import fingerUi from '../../../../public/assets/img/fingerUI.png'
 import { MdTouchApp } from 'react-icons/md'
-import AttendanceTable from './AttendanceTable'
 
 export default function AttendancePage()  {
   // const [checkInTime, setCheckInTime] = useState(null);

@@ -1,11 +1,9 @@
+"use client";
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { IoEllipsisVertical } from "react-icons/io5";
 import { MdAddCircleOutline } from "react-icons/md";
-
-import { useState } from 'react';
-
-
 
 export default function AdminDashboard() {
 

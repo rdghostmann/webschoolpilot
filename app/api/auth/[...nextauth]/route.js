@@ -6,6 +6,9 @@ import School from "@/models/School";
 
 export const authOptions = {
   // Configure one or more authentication providers
+  session: {
+    strategy: "jwt",
+  },
   providers: [
     CredentialsProvider({
       id: "credentials",
@@ -34,6 +37,9 @@ export const authOptions = {
     }),
    
   ],
+  page: {
+    signIn:"/auth/login",
+  }
 
 };
 
