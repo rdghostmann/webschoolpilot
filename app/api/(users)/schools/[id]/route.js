@@ -1,5 +1,5 @@
-import connectDB from '@/lib/database';
 import School from '@/models/School';
+import connectDB from '@/utils/database';
 import { NextResponse } from 'next/server';
 
 export const PUT = async (req) => {

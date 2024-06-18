@@ -6,13 +6,10 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 // import loginImage from '../../../../public/assets/img/login.png';
-import loginImage from '../../../../public/Institution.png';
+import loginImage from '../../../public/Institution.png';
 
 import { RiLockPasswordLine } from "react-icons/ri";
 import { MdAlternateEmail } from "react-icons/md";
-import { HiOutlineUser } from "react-icons/hi2";
-
-
 
 
 const Login = () => {

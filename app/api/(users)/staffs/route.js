@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import Staff from '@/models/Staff';
 import School from '@/models/School';
 import bcrypt from 'bcrypt';
-import connectDB from '@/app/lib/database';
+import connectDB from '@/utils/database';
 
 export const POST = async (req) => {
 

@@ -1,5 +1,5 @@
-import connectDB from '@/lib/database';
 import School from '@/models/School';
+import connectDB from '@/utils/database';
 import { generatePrefix } from '@/utils/generateUniqueID';
 import bcrypt from 'bcrypt';
 import { NextResponse } from 'next/server';

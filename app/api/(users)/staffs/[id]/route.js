@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
-import Student from '@/models/Student';
-import bcrypt from 'bcrypt';
-import connectDB from '@/app/lib/database';
+
 import Staff from '@/models/Staff';
+import connectDB from '@/utils/database';
 
 export const GET = async () => {
     try {
@@ -15,14 +14,11 @@ export const GET = async () => {
     }
   };
   
-  // Example PUT and DELETE handlers (not included in the original request)
   
-  // PUT /api/staffs/[id]
-  export const PUT_ID = async (req) => {
-    // Implement according to your specific requirements
-  };
+  // export const PUT = async (req) => {
+  // };
   
-  // DELETE /api/staffs/[id]
-  export const DELETE_ID = async (req) => {
-    // Implement according to your specific requirements
-  };
+
+
+  // export const DELETE = async (req) => {
+  // };
