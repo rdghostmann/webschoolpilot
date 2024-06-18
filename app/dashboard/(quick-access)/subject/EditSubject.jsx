@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 const EditSubject = () => {
@@ -9,7 +10,7 @@ const EditSubject = () => {
           <div class="col">
             <h3 class="page-title">Edit Subject</h3>
             <ul class="breadcrumb">
-              <li class="breadcrumb-item"><a href="subjects.html">Subject</a></li>
+              <li class="breadcrumb-item"><Link href="/subjects">Subject</Link></li>
               <li class="breadcrumb-item active">Edit Subject</li>
             </ul>
           </div>
@@ -28,19 +29,19 @@ const EditSubject = () => {
                   <div class="col-12 col-sm-4">
                     <div class="form-group local-forms">
                       <label>Subject ID <span class="login-danger">*</span></label>
-                      <input type="text" class="form-control" value="PRE1534">
+                      <input type="text" class="form-control" value="PRE1534"/>
                     </div>
                   </div>
                   <div class="col-12 col-sm-4">
                     <div class="form-group local-forms">
                       <label>Subject Name <span class="login-danger">*</span></label>
-                      <input type="text" class="form-control" value="Botony">
+                      <input type="text" class="form-control" value="Botony"/>
                     </div>
                   </div>
                   <div class="col-12 col-sm-4">
                     <div class="form-group local-forms">
                       <label>Class <span class="login-danger">*</span></label>
-                      <input type="text" class="form-control" value="9">
+                      <input type="text" class="form-control" value="9"/>
                     </div>
                   </div>
                   <div class="col-12">

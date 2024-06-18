@@ -2,6 +2,7 @@ import React from 'react'
 import img4 from '../public/assets/img/photo-1551887373-6edba6dacbb1.jpg'
 import img5 from '../public/assets/img/photo-1523240795612-9a054b0db644.jpg'
 import img6 from '../public/assets/img/photo-1485546246426-74dc88dec4d9.jpg'
+import Image from 'next/image'
 
 
 const SimplifyFeatures = () => {
@@ -53,6 +54,7 @@ const SimplifyFeatures = () => {
                         <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 preview-menu-wrapper relative">
                             <Image priority src={img5} width={1080} height={721} alt="Result Management" className="h-full w-full object-cover object-center" />
                         </div>
+                        
                         <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 preview-menu-wrapper relative">
                             <Image priority src={img6} width={1080} height={721} alt="Payment Handling" className="h-full w-full object-cover object-center" />
                         </div>
