@@ -20,8 +20,6 @@ export default function AdminDashboard() {
   }, [sessionStatus, router]);
 
 
-
-
   return (
     <div className="w-full px-4 py-6">
       <div className="mb-6">
