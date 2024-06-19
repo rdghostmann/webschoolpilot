@@ -9,6 +9,13 @@ import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 import asaphite from '../../public/assets/schoollogos/asaphite.png'
 import divine from '../../public/assets/schoollogos/divine-model.png'
 import funcare from '../../public/assets/schoollogos/funcare.png'
+import triumphant from '../../public/assets/schoollogos/triumphant.png'
+import clasam from '../../public/assets/schoollogos/clasam.png'
+import laurel from '../../public/assets/schoollogos/laurel-schools.png'
+import leadway from '../../public/assets/schoollogos/leadway.png'
+import stjude from '../../public/assets/schoollogos/st-jude-private-school.png'
+import revivalheritage from '../../public/assets/schoollogos/st-jude-private-school.png'
+import whitedove from '../../public/assets/schoollogos/st-jude-private-school.png'
 
 const LogoSchool = () => {
   return (
@@ -19,7 +26,7 @@ const LogoSchool = () => {
           type: 'loop',
           perPage: 3,
           perMove: 1,
-          gap: '1rem',
+          gap: '1.5rem',
           autoplay: true,
           interval: 10000,
           autoWidth: true,
@@ -44,7 +51,61 @@ const LogoSchool = () => {
         <SplideSlide>
           <Image
             className="max-h-12 w-full object-contain"
-            src={funcare}
+            src={whitedove}
+            alt="whitedove-Schools"
+            width={218}
+            height={60}
+          />
+        </SplideSlide>
+        <SplideSlide>
+          <Image
+            className="max-h-12 w-full object-contain"
+            src={revivalheritage}
+            alt="revival-Schools"
+            width={218}
+            height={60}
+          />
+        </SplideSlide>
+        <SplideSlide>
+          <Image
+            className="max-h-12 w-full object-contain"
+            src={stjude}
+            alt="st-jude-Schools"
+            width={218}
+            height={60}
+          />
+        </SplideSlide>
+        <SplideSlide>
+          <Image
+            className="max-h-12 w-full object-contain"
+            src={leadway}
+            alt="leadway-Schools"
+            width={218}
+            height={60}
+          />
+        </SplideSlide>
+        <SplideSlide>
+          <Image
+            className="max-h-12 w-full object-contain"
+            src={laurel}
+            alt="laurel-Schools"
+            width={218}
+            height={60}
+          />
+        </SplideSlide>
+        <SplideSlide>
+          <Image
+            className="max-h-12 w-full object-contain"
+            src={clasam}
+            alt="clasam-Schools"
+            width={218}
+            height={60}
+          />
+        </SplideSlide>
+        <SplideSlide>
+          <Image
+            className="max-h-12 w-full object-contain"
+            src={triumphant}
             alt="Truimphant-Schools"
             width={218}
             height={60}
