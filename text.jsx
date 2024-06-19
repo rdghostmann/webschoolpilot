@@ -14,7 +14,7 @@ const RegisterSchool = () => {
   const router = useRouter();
 
   const { data: session, status: sessionStatus } = useSession();
-  
+
   useEffect(() => {
     if (sessionStatus === "authenticated") {
       router.replace("/dashboard/admin");
@@ -28,82 +28,42 @@ const RegisterSchool = () => {
       .catch(error => console.error('Error fetching states:', error));
   }, []);
 
-  
-
-  const [form, setForm] = useState({
-    name: "",
-    state: "",
-    localGovernment: "",
-    city: "",
-    address: "",
-    gradeType: "",
-    genderType: "",
-    ownershipType: "",
-    enrollmentType: "",
-    religion: "",
-    mission: "",
-    phoneNumber: "",
-    email: "",
-    password: "",
-    confirmPassword: ""
-  });
-
- 
-
-  useEffect(() => {
-    fetch('https://nga-states-lga.onrender.com/fetch')
-      .then(response => response.json())
-      .then(data => setStates(data))
-      .catch(error => console.error('Error fetching states:', error));
-  }, []);
-
-  useEffect(() => {
-    if (form.state) {
-      fetch(`https://nga-states-lga.onrender.com/?state=${form.state}`)
-        .then(response => response.json())
-        .then(data => setLgas(data))
-        .catch(error => console.error('Error fetching LGAs:', error));
+  const handleStateChange = async (event) => {
+    const state = event.target.value;
+    setLgas([]);
+    if (state) {
+      try {
+        const response = await fetch(`https://nga-states-lga.onrender.com/?state=${state}`);
+        const data = await response.json();
+        setLgas(data);
+      } catch (error) {
+        console.error('Error fetching LGAs:', error);
+      }
     }
-  }, [form.state]);
-
-  const isValidEmail = (email) => {
-    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    return emailRegex.test(email);
-  };
-
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData(e.target);
 
-    if (!form.name || !form.state || !form.localGovernment || !form.city || !form.address || !form.gradeType 
-      || !form.genderType || !form.ownershipType || !form.enrollmentType || !form.religion || !form.phoneNumber || !form.email || !form.password) {
-      setError("Please Fill all Fields !");
-      return;
-    }
+    const password = formData.get('password');
+    const confirmPassword = formData.get('confirmPassword');
 
-    if (!isValidEmail(form.email)) {
-      setError("Email is invalid");
-      return;
-    }
-
-    if (form.password !== form.confirmPassword) {
+    if (password !== confirmPassword) {
       setPasswordMismatch(true);
       return;
     }
 
+    setPasswordMismatch(false);
+    setError("");
+
     try {
       const response = await fetch("/api/schools", {
         method: "POST",
+        body: JSON.stringify(Object.fromEntries(formData)),
         headers: {
           "Content-Type": "application/json"
-        },
-        body: JSON.stringify(form)
+        }
       });
 
       if (response.ok) {
@@ -121,7 +81,7 @@ const RegisterSchool = () => {
 
   return (
     <div className="w-full min-h-screen p-4 flex items-center justify-center bg-gray-100">
-      <div className=" max-w-lg mx-auto">
+      <div className="max-w-lg mx-auto">
         <div className="bg-white p-8 rounded shadow">
           <div className="bg-indigo-500 flex justify-center">
             <Image
@@ -152,8 +112,6 @@ const RegisterSchool = () => {
                     required
                     className="appearance-none rounded relative block w-full px-2 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     placeholder="School Full Name"
-                    value={form.name}
-                    onChange={handleChange}
                   />
                 </div>
 
@@ -167,8 +125,6 @@ const RegisterSchool = () => {
                       name="state"
                       required
                       className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      value={form.state}
-                      onChange={handleChange}
                     >
                       <option value="">Select State</option>
                       {states.map((state) => (
@@ -188,9 +144,7 @@ const RegisterSchool = () => {
                       name="localGovernment"
                       required
                       className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      value={form.localGovernment}
-                      onChange={handleChange}
-                      disabled={!form.state}
+                      disabled={lgas.length === 0}
                     >
                       <option value="">Select Local Government</option>
                       {lgas.map((lga) => (
@@ -215,8 +169,6 @@ const RegisterSchool = () => {
                       required
                       className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       placeholder="City/Town"
-                      value={form.city}
-                      onChange={handleChange}
                     />
                   </div>
                   <div>
@@ -231,8 +183,6 @@ const RegisterSchool = () => {
                       required
                       className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       placeholder="Address"
-                      value={form.address}
-                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -245,7 +195,7 @@ const RegisterSchool = () => {
                     </p>
                     <div className="flex flex-col space-y-2">
                       {["Creche", "Primary", "Secondary", "Comprehensive", "Tertiary"].map((type, index) => (
-                        <label htmlFor={`gradeType-${type}`} key={index} className="inline-flex items-center">
+                        <label htmlFor={`gradeType-${index}`} key={index} className="inline-flex items-center">
                           <input
                             id={`gradeType-${index}`}
                             autoComplete="off"
@@ -253,9 +203,6 @@ const RegisterSchool = () => {
                             name="gradeType"
                             value={type}
                             required
-                            className="form-radio"
-                            checked={form.gradeType === type}
-                            onChange={handleChange}
                           />
                           <span className="ml-2 text-sm">{type}</span>
                         </label>
@@ -277,9 +224,6 @@ const RegisterSchool = () => {
                             name="genderType"
                             value={type}
                             required
-                            className="form-radio"
-                            checked={form.genderType === type}
-                            onChange={handleChange}
                           />
                           <span className="ml-2 text-sm">{type}</span>
                         </label>
@@ -294,7 +238,7 @@ const RegisterSchool = () => {
                       School Ownership Type <span className="text-red-500">*</span>
                     </p>
                     <div className="flex flex-col space-y-2">
-                      {["private", "government", "mission" ].map((type, index) => (
+                      {["private", "public", ].map((type, index) => (
                         <label htmlFor={`ownershipType-${index}`} key={index} className="inline-flex items-center">
                           <input
                             id={`ownershipType-${index}`}
@@ -303,9 +247,6 @@ const RegisterSchool = () => {
                             name="ownershipType"
                             value={type}
                             required
-                            className="form-radio"
-                            checked={form.ownershipType === type}
-                            onChange={handleChange}
                           />
                           <span className="ml-2 text-sm">{type}</span>
                         </label>
@@ -327,9 +268,6 @@ const RegisterSchool = () => {
                             name="enrollmentType"
                             value={type}
                             required
-                            className="form-radio"
-                            checked={form.enrollmentType === type}
-                            onChange={handleChange}
                           />
                           <span className="ml-2 text-sm">{type}</span>
                         </label>
@@ -344,15 +282,13 @@ const RegisterSchool = () => {
                   <select
                     id="religion"
                     name="religion"
-                    required
                     className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    value={form.religion}
-                    onChange={handleChange}
+                    required
                   >
                     <option value="">Select Religion</option>
-                    {["Christianity", "Judaism", "Islam"].map((religion, index) => (
-                      <option key={index} value={religion}>
-                        {religion}
+                    {["Christian", "Christianity", "Muslim", "Judaism", "Islam"].map((mission) => (
+                      <option key={mission} value={mission}>
+                        {mission}
                       </option>
                     ))}
                   </select>
@@ -364,10 +300,8 @@ const RegisterSchool = () => {
                   <select
                     id="mission"
                     name="mission"
-                    required
                     className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    value={form.mission}
-                    onChange={handleChange}
+                    required
                   >
                     <option value="">Select Mission</option>
                     {["Catholic", "Anglican", "Pentecostal", "Sabbath", "Islam"].map((mission) => (
@@ -387,11 +321,9 @@ const RegisterSchool = () => {
                       id="phoneNumber"
                       name="phoneNumber"
                       type="tel"
-                      required
                       className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       placeholder="Enter Phone Number"
-                      value={form.phoneNumber}
-                      onChange={handleChange}
+                      required
                     />
                   </div>
 
@@ -407,14 +339,12 @@ const RegisterSchool = () => {
                       required
                       className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       placeholder="Enter Email Address"
-                      value={form.email}
-                      onChange={handleChange}
                     />
                   </div>
                 </div>
 
-                <div className="flex flex-col space-y-4 mb-4">
-                  <div className="">
+                <div className="flex space-x-5 md:space-x-10 lg:space-x-12 mt-4">
+                  <div>
                     <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                       Password <span className="text-red-500">*</span>
                     </label>
@@ -425,13 +355,10 @@ const RegisterSchool = () => {
                       type="password"
                       required
                       className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      placeholder="Enter Password"
-                      value={form.password}
-                      onChange={handleChange}
+                      placeholder="Password"
                     />
                   </div>
-
-                  <div className="">
+                  <div>
                     <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
                       Confirm Password <span className="text-red-500">*</span>
                     </label>
@@ -443,48 +370,36 @@ const RegisterSchool = () => {
                       required
                       className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       placeholder="Confirm Password"
-                      value={form.confirmPassword}
-                      onChange={handleChange}
                     />
-                  </div>
-                  {passwordMismatch && (
-                    <p className="text-red-500 text-sm">Passwords do not match</p>
-                  )}
-                </div>
-
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center">
-                    <input
-                      id="terms"
-                      name="terms"
-                      type="checkbox"
-                      required
-                      className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                    />
-                    <label htmlFor="terms" className="ml-2 block text-sm text-gray-900">
-                      I accept the{' '}
-                      <Link href="/terms">
-                        <span className="text-indigo-600 hover:text-indigo-500">
-                          Terms and Conditions
-                        </span>
-                      </Link>
-                    </label>
                   </div>
                 </div>
 
-                <div>
-                  <button
-                    type="submit"
-                    className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Submit
-                  </button>
-                  {error && (
-                    <p className="mt-2 text-center text-sm text-red-600">{error}</p>
-                  )}
-                </div>
+                {passwordMismatch && <p className="text-red-500 text-sm">Passwords do not match.</p>}
+              </div>
+
+              <div>
+                <button
+                  type="submit"
+                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Register
+                </button>
               </div>
             </form>
+
+            {error && (
+              <div className="mt-2 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <strong className="font-bold">Error!</strong>
+                <span className="block sm:inline"> {error}</span>
+              </div>
+            )}
+
+            <p className="mt-4 text-center text-sm">
+              Already have an account?{" "}
+              <Link href="/auth" className="font-medium text-indigo-600 hover:text-indigo-500">
+                Login
+              </Link>
+            </p>
           </div>
         </div>
       </div>
@@ -493,5 +408,3 @@ const RegisterSchool = () => {
 };
 
 export default RegisterSchool;
-
-

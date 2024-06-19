@@ -24,7 +24,7 @@ const SchoolSchema = new mongoose.Schema({
     gradeType: {
         type: String,
         required: true,
-        enum: ['Creche/Nursery', 'Primary', 'Secondary', 'Tertiary'],
+        enum: ['Creche', 'Primary', 'Secondary','Comprehensive', 'Tertiary'],
     },
     genderType: {
         type: String,
@@ -39,7 +39,11 @@ const SchoolSchema = new mongoose.Schema({
     enrollmentType: {
         type: String,
         required: true,
-        enum: ['only day', 'only boarders', 'day and boarders'],
+        enum: ['day', 'boarding', 'day and boarders'],
+    },
+    religion: {
+        type: String,
+        enum: ['Christianity', 'Judaism', 'Islam'],
     },
     mission: {
         type: String,
