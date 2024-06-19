@@ -14,8 +14,8 @@ import clasam from '../../public/assets/schoollogos/clasam.png'
 import laurel from '../../public/assets/schoollogos/laurel-schools.png'
 import leadway from '../../public/assets/schoollogos/leadway.png'
 import stjude from '../../public/assets/schoollogos/st-jude-private-school.png'
-import revivalheritage from '../../public/assets/schoollogos/st-jude-private-school.png'
-import whitedove from '../../public/assets/schoollogos/st-jude-private-school.png'
+import revivalheritage from '../../public/assets/schoollogos/revival-heritage-school-logo.jpg'
+import whitedove from '../../public/assets/schoollogos/white-dove-schools.png'
 
 const LogoSchool = () => {
   return (
