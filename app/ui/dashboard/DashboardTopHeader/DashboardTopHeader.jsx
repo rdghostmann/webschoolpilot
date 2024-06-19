@@ -1,14 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
-// import logo from '../../../../../public/assets/img/logo.png';
-import badgeImg from '../../../../../public/assets/img/icons/header-icon-01.svg';
-import badgeIcon from '../../../../../public/assets/img/icons/header-icon-05.svg';
-import avatar1 from '../../../../../public/assets/img/profiles/avatar-01.jpg';
-import avatar11 from '../../../../../public/assets/img/profiles/avatar-11.jpg';
-import avatar2 from '../../../../../public/assets/img/profiles/avatar-02.jpg';
-import avatar13 from '../../../../../public/assets/img/profiles/avatar-13.jpg';
-import avatar17 from '../../../../../public/assets/img/profiles/avatar-17.jpg';
-import headerIcon4 from '../../../../../public/assets/img/icons/header-icon-04.svg';
+import badgeImg from '../../../../public/assets/img/icons/header-icon-01.svg';
+import badgeIcon from '../../../../public/assets/img/icons/header-icon-05.svg';
+// import avatar1 from '../../../../../public/assets/img/profiles/avatar-01.jpg';
+// import avatar11 from '../../../../../public/assets/img/profiles/avatar-11.jpg';
+// import avatar2 from '../../../../../public/assets/img/profiles/avatar-02.jpg';
+// import avatar13 from '../../../../../public/assets/img/profiles/avatar-13.jpg';
+// import avatar17 from '../../../../../public/assets/img/profiles/avatar-17.jpg';
+// import headerIcon4 from '../../../../../public/assets/img/icons/header-icon-04.svg';
 
 import { SearchIcon } from 'lucide-react';
 
@@ -20,11 +19,11 @@ const DashboardTopHeader = () => {
   const {data: session} = useSession();
 
   return (
-    <div className="w-full border border-black flex items-center justify-between header">
+    <div className="w-full flex items-center justify-between header">
 
 
       {/* top-nav-search */}
-      <div className="border-2 border-slate-300 overflow-hidden rounded-md focus:outline-1 focus:ring-offset-1">
+      <div className=" border-slate-300 overflow-hidden rounded-md focus:outline-1 focus:ring-offset-1">
         <form className=" bg-white p-1 flex items-center">
           <input type="text" className="px-2 border-none outline-none" placeholder="Search here" />
           <button className="" >
@@ -33,12 +32,12 @@ const DashboardTopHeader = () => {
         </form>
       </div>
 
-      <ul className="border border-black flex space-x-4 items-baseline nav user-menu">
+      <ul className="flex space-x-4 items-center ">
        
         {session ? (
           <>
           <li className="nav-item dropdown language-drop me-2">
-          <button onClick={()=>{signOut()}} className=" p-2 px-5 bg-blue-500 rounded-" >
+          <button onClick={()=>{signOut()}} className="cursor-pointer p-2 px-5 bg-blue-500 rounded-" >
             Logout
           </button>
           

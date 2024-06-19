@@ -1,7 +1,6 @@
 'use client'
 import Link from 'next/link'
 import React from 'react'
-// import DashboardTopHeader from '../DashboardTopHeader/DashboardTopHeader';
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose } from "@/components/ui/dialog";
 import {
@@ -22,6 +21,7 @@ import { MdEventNote } from "react-icons/md";
 import { LiaBusSolid } from "react-icons/lia";
 import { PiBuildingApartment } from "react-icons/pi";
 import { RiSecurePaymentFill } from "react-icons/ri";
+import DashboardTopHeader from '../DashboardTopHeader/DashboardTopHeader';
 
 
 const DashboardNavBar = ({ children }) => {
@@ -149,10 +149,10 @@ const DashboardNavBar = ({ children }) => {
 
         </Dialog>
 
-{/* <DashboardTopHeader /> */}
+<DashboardTopHeader />
       </header>
       
-      {/* {children} */}
+      {children}
     </div>
   )
 }

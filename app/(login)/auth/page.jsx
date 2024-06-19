@@ -71,7 +71,7 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="max-w-md w-full space-y-8">
         <div className="bg-white p-8 rounded shadow">
-          <div className="border flex justify-center">
+          <div className="flex justify-center">
             <Image src={loginImage} alt="Logo" className="w-1/2 h-auto" priority />
           </div>
           <div className="mt-6">

@@ -1,23 +1,26 @@
 "use client";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { IoEllipsisVertical } from "react-icons/io5";
 import { MdAddCircleOutline } from "react-icons/md";
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function AdminDashboard() {
+  const { data: session, status: sessionStatus } = useSession();
 
-
-  const [counts, setCounts] = useState();
+  const router = useRouter();
 
   useEffect(() => {
-    async function fetchCounts() {
-      const response = await fetch('/api/dashboard-counts');
-      const countData = await response.json();
-      setCounts(countData);
+    if (sessionStatus === "authenticated") {
+
+      router.replace("/dashboard/admin");
     }
-    fetchCounts();
-  }, [])
+  }, [sessionStatus, router]);
+
+
+
 
   return (
     <div className="w-full px-4 py-6">
@@ -29,8 +32,8 @@ export default function AdminDashboard() {
               <li className="breadcrumb-item"><Link href="/">Home</Link></li>
               <li>/</li>
               <li className="breadcrumb-item text-indigo-400">Admin</li>
-            </ul>          
-            </div>
+            </ul>
+          </div>
         </div>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 my-4">
@@ -44,25 +47,55 @@ export default function AdminDashboard() {
       </div>
 
 
+
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-        {[
-          { title: 'Students', count: {counts}, icon: 'dash-icon-01.svg' },
-          { title: 'Awards', count: '50+', icon: 'dash-icon-02.svg' },
-          { title: 'Schools', count: {counts}, icon: 'dash-icon-03.svg' },
-          { title: 'Revenue', count: '$505', icon: 'dash-icon-04.svg' },
-        ].map((item, index) => (
-          <div key={index} className="flex">
-            <div className="bg-white shadow-md rounded-lg p-4 w-full flex items-center justify-between">
-              <div>
-                <h6 className="text-gray-600">{item.title}</h6>
-                <h3 className="text-xl font-bold">{item.count}</h3>
-              </div>
-              <div>
-                <Image style={{ width: "auto", height: "auto", objectFit: "cover" }} src={`/assets/img/icons/${item.icon}`} alt={item?.title} width={40} height={40} />
-              </div>
+        
+        <div className="flex">
+          <div className="bg-white shadow-md rounded-lg p-4 w-full flex items-center justify-between">
+            <div>
+              <h6 className="text-gray-600">Students</h6>
+              <h3 className="text-xl font-bold">40</h3>
+            </div>
+            <div>
+              <Image style={{ width: "auto", height: "auto", objectFit: "cover" }} src={`/assets/img/icons/dash-icon-01.svg`} alt="Student" width={40} height={40} />
             </div>
           </div>
-        ))}
+        </div>
+
+        <div className="flex">
+          <div className="bg-white shadow-md rounded-lg p-4 w-full flex items-center justify-between">
+            <div>
+              <h6 className="text-gray-600">Awards</h6>
+              <h3 className="text-xl font-bold">40</h3>
+            </div>
+            <div>
+              <Image style={{ width: "auto", height: "auto", objectFit: "cover" }} src={`/assets/img/icons/dash-icon-02.svg`} alt="Awards" width={40} height={40} />
+            </div>
+          </div>
+        </div>
+        <div className="flex">
+          <div className="bg-white shadow-md rounded-lg p-4 w-full flex items-center justify-between">
+            <div>
+              <h6 className="text-gray-600">Schools</h6>
+              <h3 className="text-xl font-bold">40+</h3>
+            </div>
+            <div>
+              <Image style={{ width: "auto", height: "auto", objectFit: "cover" }} src={`/assets/img/icons/dash-icon-03.svg`} alt="Schools" width={40} height={40} />
+            </div>
+          </div>
+        </div>
+        <div className="flex">
+          <div className="bg-white shadow-md rounded-lg p-4 w-full flex items-center justify-between">
+            <div>
+              <h6 className="text-gray-600">Revenue</h6>
+              <h3 className="text-xl font-bold">4500</h3>
+            </div>
+            <div>
+              <Image style={{ width: "auto", height: "auto", objectFit: "cover" }} src={`/assets/img/icons/dash-icon-04.svg`} alt="Revenue" width={40} height={40} />
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 my-4">
