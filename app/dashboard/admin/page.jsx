@@ -6,11 +6,13 @@ import { IoEllipsisVertical } from "react-icons/io5";
 import { MdAddCircleOutline } from "react-icons/md";
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import Student from '@/models/Student';
 
 export default function AdminDashboard() {
   const { data: session, status: sessionStatus } = useSession();
 
   const router = useRouter();
+
 
   useEffect(() => {
     if (sessionStatus === "authenticated") {
@@ -18,6 +20,7 @@ export default function AdminDashboard() {
       router.replace("/dashboard/admin");
     }
   }, [sessionStatus, router]);
+
 
 
   return (

@@ -3,38 +3,38 @@ import Image from 'next/image'
 import fingerUi from '../../../../public/assets/img/fingerUI.png'
 import { MdTouchApp } from 'react-icons/md'
 
-export default function AttendancePage()  {
-  // const [checkInTime, setCheckInTime] = useState(null);
-  // const [checkOutTime, setCheckOutTime] = useState(null);
-  // const [lateTime, setLateTime] = useState('0 minutes');
+export default function TeacherAttendance()  {
+  const [checkInTime, setCheckInTime] = useState(null);
+  const [checkOutTime, setCheckOutTime] = useState(null);
+  const [lateTime, setLateTime] = useState('0 minutes');
 
-  // const checkIn = () => {
-  //   const currentTime = new Date();
-  //   setCheckInTime(currentTime);
+  const checkIn = () => {
+    const currentTime = new Date();
+    setCheckInTime(currentTime);
 
-  //   const checkInThreshold = new Date();
-  //   checkInThreshold.setHours(7, 30, 0, 0); // 7:30 AM
+    const checkInThreshold = new Date();
+    checkInThreshold.setHours(7, 30, 0, 0); // 7:30 AM
 
-  //   if (currentTime > checkInThreshold) {
-  //     const diff = Math.floor((currentTime - checkInThreshold) / (1000 * 60)); // Difference in minutes
-  //     setLateTime(`${diff} minutes`);
-  //   } else {
-  //     setLateTime('0 minutes');
-  //   }
-  // };
+    if (currentTime > checkInThreshold) {
+      const diff = Math.floor((currentTime - checkInThreshold) / (1000 * 60)); // Difference in minutes
+      setLateTime(`${diff} minutes`);
+    } else {
+      setLateTime('0 minutes');
+    }
+  };
 
-  // const checkOut = () => {
-  //   setCheckOutTime(new Date());
-  // };
+  const checkOut = () => {
+    setCheckOutTime(new Date());
+  };
 
-  // const formatTime = (date) => {
-  //   if (!date) return '0';
-  //   const hours = date.getHours().toString().padStart(2, '0');
-  //   const minutes = date.getMinutes().toString().padStart(2, '0');
-  //   const ampm = hours >= 12 ? 'PM' : 'AM';
-  //   const formattedHours = hours % 12 || 12;
-  //   return `${formattedHours}:${minutes}${ampm}`;
-  // };
+  const formatTime = (date) => {
+    if (!date) return '0';
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = hours % 12 || 12;
+    return `${formattedHours}:${minutes}${ampm}`;
+  };
 
 
 
@@ -89,9 +89,7 @@ export default function AttendancePage()  {
         </div>
       </div>
 
-      {/* <div className="p-2"> */}
-        {/* <AttendanceTable /> */}
-      {/* </div> */}
+
 
     </div>
 
