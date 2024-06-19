@@ -1,4 +1,3 @@
-//models/Student.js
 import mongoose from 'mongoose';
 
 const StudentSchema = new mongoose.Schema({
@@ -48,10 +47,19 @@ const StudentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  guardianPhoneNumber: [{
+  email: {
+    type: String,
+    required: true,
+  },
+  guardianPhoneNumber1: {
     type: String,
     match: [/^\d{10,15}$/, 'Please fill a valid phone number'],
-  }],
+    required: true,
+  },
+  guardianPhoneNumber2: {
+    type: String,
+    match: [/^\d{10,15}$/, 'Please fill a valid phone number'],
+  },
   address: {
     type: String,
     required: true,

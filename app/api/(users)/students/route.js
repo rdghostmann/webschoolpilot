@@ -8,11 +8,11 @@ export const POST = async (req) => {
   const body = await req.json();
   const {
     uniqueID, name, dob, regNo, password, dateOfEntry, guardianName, relationship, profilePicture,
-    classOfEntry, hostelName, houseName, gender, email, guardianPhoneNumber, address,
+    classOfEntry, hostelName, houseName, gender, email, guardianPhoneNumber1, guardianPhoneNumber2, address,
   } = body;
 
   if (!uniqueID || !name || !dob || !regNo || !password || !dateOfEntry || !guardianName ||
-    !relationship || !classOfEntry || !gender || !guardianPhoneNumber || !address) {
+    !relationship || !classOfEntry || !gender || !email || !guardianPhoneNumber1 || !address) {
     return NextResponse.json({ error: 'All required fields must be provided' }, { status: 400 });
   }
 
@@ -40,7 +40,8 @@ export const POST = async (req) => {
     houseName,
     gender,
     email,
-    guardianPhoneNumber,
+    guardianPhoneNumber1,
+    guardianPhoneNumber2,  
     address,
     schoolID: school._id,
     schoolName: school.name,

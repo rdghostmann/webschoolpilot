@@ -87,12 +87,13 @@ export default function AddStudentForm() {
       {success ? (
         <div className="flex flex-col items-center justify-center text-center">
           <h3 className="text-2xl font-bold mb-4">Student Created Successfully!</h3>
-          <button
+          <Link
             className="py-2 px-4 bg-green-500 text-white rounded"
-            onClick={()=> router.push('/dashboard/onboardstudent')}
+            href={'/dashboard/onboardstudent'}
           >
             Onboard Another Student
-          </button>
+          </Link>
+          
         </div>
       ) : (
         <>
